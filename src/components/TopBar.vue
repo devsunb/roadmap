@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,6 +20,14 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+    background-color: #2b1939;
+}
+
+.navbar-brand {
+    margin: 16px 40px;
+}
+
 .search-input {
     background-color: transparent;
     color: white;
