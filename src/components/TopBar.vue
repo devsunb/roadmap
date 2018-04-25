@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
-            <a class="navbar-brand" href="#">Learning DB</a>
+            <a class="navbar-brand" href="#"><img src="/static/logo.png" width="160" height="58"></a>
             <form class="form-inline my-2 my-lg-0 mx-auto">
                 <input class="form-control search-input" type="search">
                 <button class="btn search-btn my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <button type="button" class="btn navbar-btn" @click="toggleSideBar">
-            <i class="fas fa-arrow-left"></i>
+            <img src="/static/sidebar_toggle.png">
         </button>
         <nav id="sidebar">
             <button type="button" class="btn dismiss pb-5" @click="dismiss">
@@ -37,16 +37,23 @@ export default {
     position: fixed;
     top: 0;
     right: 0;
+    width: 48px;
     height: 100vh;
+    z-index: 998;
     border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
     box-shadow: -3px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 #sidebar {
-    width: 250px;
+    width: 368px;
     position: fixed;
     top: 88px;
-    right: -250px;
+    right: -368px;
     height: 100vh;
     z-index: 999;
     background: #e8e3ec;
@@ -120,5 +127,11 @@ a[aria-expanded="true"]::before {
 }
 a[aria-expanded="true"]::before {
     content: "\e260";
+}
+
+@media (max-width: 1400px) {
+    .navbar-btn {
+        width: 40px;
+    }
 }
 </style>
