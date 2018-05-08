@@ -1,12 +1,48 @@
 <template>
-    <div>
-        <button type="button" class="btn navbar-btn" @click="toggleSideBar">
-            <img src="/static/sidebar_toggle.png">
-        </button>
-        <nav id="sidebar">
-            <button type="button" class="btn dismiss pb-5" @click="dismiss">
-                <img src="/static/x.png">
+    <div class="outer">
+        <div class="inner">
+            <button type="button" class="btn navbar-btn" @click="toggleList">
+                <i class="fas fa-bars"></i>
             </button>
+            <button type="button" class="btn navbar-btn" @click="toggleVideo">
+                <i class="fas fa-play"></i>
+            </button>
+            <button type="button" class="btn navbar-btn" @click="toggleBook">
+                <i class="fas fa-book"></i>
+            </button>
+            <button type="button" class="btn navbar-btn" @click="toggleDoc">
+                <i class="fas fa-file-alt"></i>
+            </button>
+        </div>
+        <nav class="sidebar" :class="[{active}, mode]">
+            <button type="button" class="btn dismiss" :class="[mode]" @click="dismiss">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="sidebar-content">
+                <div v-if="mode == 'list'">
+                    
+                </div>
+                <div v-if="mode == 'video'">
+                    <div class="float-left shelf-slot">
+                        <div class="thumbs">
+                            <span class="mr-5"><img src="/static/thumb_up.png" class="mr-3 pb-1">000</span><span><img src="/static/thumb_down.png" class="mr-3 pb-1">000</span>
+                        </div>
+                        <div class="live">
+                            <iframe width="280" height="170" src="https://www.youtube.com/embed/xo20E9Gjono" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <div class="meta">
+                            <p class="title mt-2 mb-1">[브베] 브생화 ver 2</p>
+                            <p class="date">00일 전</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="mode == 'book'">
+                    
+                </div>
+                <div v-if="mode == 'doc'">
+                    
+                </div>
+            </div>
         </nav>
     </div>
 </template>
@@ -15,55 +51,117 @@
 export default {
     name: "side-bar",
     mounted: function() {
-        $("#sidebar").mCustomScrollbar({
+        $(".sidebar-content").mCustomScrollbar({
             theme: "minimal"
         });
     },
+    data: function() {
+        return {
+            mode: "list",
+            active: false
+        };
+    },
     methods: {
-        toggleSideBar: function() {
-            $("#sidebar").addClass("active");
-            $(".collapse.in").toggleClass("in");
-            $("a[aria-expanded=true]").attr("aria-expanded", "false");
+        toggleList: function() {
+            this.active = true;
+            this.mode = "list";
+        },
+        toggleVideo: function() {
+            this.active = true;
+            this.mode = "video";
+        },
+        toggleBook: function() {
+            this.active = true;
+            this.mode = "book";
+        },
+        toggleDoc: function() {
+            this.active = true;
+            this.mode = "doc";
         },
         dismiss: function() {
-            $("#sidebar").removeClass("active");
+            this.active = false;
         }
     }
 };
 </script>
 
 <style scoped>
-.navbar-btn {
+.outer {
     position: fixed;
+    display: table;
     top: 0;
     right: 0;
-    width: 48px;
-    height: 100vh;
-    z-index: 998;
-    border-radius: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.navbar-btn:hover {
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: -3px 0px 5px rgba(0, 0, 0, 0.2);
-}
-
-#sidebar {
-    width: 368px;
-    position: fixed;
-    top: 88px;
-    right: -368px;
+    padding-top: 72px;
+    width: 72px;
     height: 100vh;
     z-index: 999;
-    background: #e8e3ec;
-    color: black;
-    transition: all 0.3s;
-    overflow-y: scroll;
+    border-radius: 0;
 }
 
-#sidebar.active {
-    right: 0;
+.inner {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: #ffffff;
+    box-shadow: 0 0 4px 2px #888888;
+}
+
+.navbar-btn {
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #282828;
+    font-size: 22px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.navbar-btn:hover {
+    background-color: #282828;
+    color: #ffffff;
+}
+
+.sidebar {
+    width: 400px;
+    position: fixed;
+    top: 0;
+    right: -328px;
+    height: 100%;
+    z-index: 998;
+    padding-top: 72px;
+    background-color: #e8e3ec;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.sidebar.active {
+    right: 72px;
+}
+.sidebar.list {
+    background-color: #e8e3ec;
+    color: black;
+}
+.sidebar.video {
+    background-color: #282828;
+    color: white;
+}
+.sidebar.book {
+    background-color: #2d5096;
+    color: white;
+}
+.sidebar.doc {
+    background-color: #e8e3ec;
+    color: black;
+}
+
+.sidebar-content {
+    padding-left: 45px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .dismiss {
@@ -72,66 +170,40 @@ export default {
     left: 0;
     width: 45px;
     height: 100%;
-    line-height: 35px;
+    z-index: 1;
+    padding-top: 72px;
+    background-color: #e8e3ec;
+    font-size: 24px;
     text-align: center;
-    background: #e8e3ec;
     cursor: pointer;
     -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
     transition: all 0.3s;
 }
-
-#sidebar .sidebar-header {
-    padding: 20px;
-    background: white;
+.dismiss.list {
+    background-color: #e8e3ec;
+    color: black;
 }
-
-#sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p {
+.dismiss.video {
+    background-color: #282828;
     color: white;
-    padding: 10px;
 }
-
-#sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
+.dismiss.book {
+    background-color: #2d5096;
+    color: white;
 }
-#sidebar ul li a:hover {
+.dismiss.doc {
+    background-color: #e8e3ec;
     color: black;
-    background: white;
 }
 
-#sidebar ul li.active > a,
-a[aria-expanded="true"] {
-    color: black;
-    background: white;
+.shelf-slot {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-
-a[data-toggle="collapse"] {
-    position: relative;
-}
-
-a[aria-expanded="false"]::before,
-a[aria-expanded="true"]::before {
-    content: "\e259";
-    display: block;
-    position: absolute;
-    right: 20px;
-    font-family: "Glyphicons Halflings";
-    font-size: 0.6em;
-}
-a[aria-expanded="true"]::before {
-    content: "\e260";
-}
-
-@media (max-width: 1400px) {
-    .navbar-btn {
-        width: 40px;
-    }
+.shelf-slot > .thumbs {
+    text-align: center;
+    color: #999999;
+    margin-bottom: 10px;
 }
 </style>
