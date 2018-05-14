@@ -1,3 +1,5 @@
 import CONFIG from "../config";
 
-export default {};
+export default {
+  sidebar: false
+};
