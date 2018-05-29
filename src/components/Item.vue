@@ -65,7 +65,38 @@ export default {
 
 @media (max-width: 1400px) {
     .item {
-        width: 1400px;
+        margin-top: 180px;
+    }
+    .item > .title {
+        margin-left: 180px;
+        font-size: 42px;
+    }
+    .description {
+        margin-top: 32px;
+        padding: 0 180px;
+    }
+}
+@media (max-width: 768px) {
+    .item {
+        margin-top: 120px;
+    }
+    .item > .title {
+        margin-left: 100px;
+        font-size: 38px;
+    }
+    .description {
+        margin-top: 32px;
+        padding: 0 100px;
+    }
+}
+@media (max-width: 480px) {
+    .item > .title {
+        margin-left: 20px;
+        font-size: 32px;
+    }
+    .description {
+        margin-top: 30px;
+        padding: 0 20px;
     }
 }
 </style>
